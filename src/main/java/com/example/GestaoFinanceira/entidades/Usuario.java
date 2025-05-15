@@ -26,4 +26,6 @@ public class Usuario {
         this.cpf = cpf;
         this.senha = senha;
     }
+
+
 }
