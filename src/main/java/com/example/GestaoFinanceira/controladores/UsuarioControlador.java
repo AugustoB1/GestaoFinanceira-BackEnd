@@ -2,7 +2,7 @@ package com.example.GestaoFinanceira.controladores;
 
 import com.example.GestaoFinanceira.entidades.Usuario;
 import com.example.GestaoFinanceira.repositorios.UsuarioRepositorio;
-import com.example.GestaoFinanceira.servicos.CadastrarServico;
+import com.example.GestaoFinanceira.servicos.UsuarioServico;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -20,7 +20,7 @@ public class UsuarioControlador {
     @Autowired
     UsuarioRepositorio repositorio;
     @Autowired
-    CadastrarServico servico;
+    UsuarioServico servico;
 
     @PostMapping("/cadastrar")
     public ResponseEntity<?> cadastrarUsuario(@RequestBody Usuario usuario) {

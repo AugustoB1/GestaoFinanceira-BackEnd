@@ -8,9 +8,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CadastrarServico {
+public class UsuarioServico {
 
     private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
     @Autowired
     UsuarioRepositorio usuarioRepositorio;
 
@@ -19,5 +20,17 @@ public class CadastrarServico {
         user.setSenha(criptografando);
         Usuario usuario = new Usuario(user.getNome(), user.getEmail(), user.getCpf(), user.getSenha());
         return usuarioRepositorio.save(usuario);
+    }
+
+    public Usuario login(String email, String senha){
+        Usuario usuario = usuarioRepositorio.findByEmail(email);
+        if(usuario != usuarioRepositorio && validarSenha(usuario, senha)){
+            return usuario;
+        }
+        throw new RuntimeException();
+    }
+
+    public boolean validarSenha(Usuario usuario, String senha){
+        return  passwordEncoder.matches(senha, usuario.getSenha());
     }
 }
